@@ -5,6 +5,12 @@ A series of algorithms and small projects created to learn the Go language as we
 ####Sorting
 A Merge and Bubble sort as my first interaction with Go.
 
+TODO: Other kinds of sorts.
+
+####Sudoku Solver
+A Sudoku puzzle solver using a backtracking recursive algorithm.
+
+TODO: Better input.
+
 ####TODO
-* Sudoku Solver
 * Trie
