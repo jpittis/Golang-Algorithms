@@ -12,5 +12,15 @@ A Sudoku puzzle solver using a backtracking recursive algorithm.
 
 TODO: Better input.
 
+####Trie
+A simple Trie tree implementation.
+
+TODO: Not working!
+
+####Maze
+Create mazes and solve them.
+
+TODO: Create maze. Solve maze.
+
 ####TODO
-* Trie
+* image manipulation? switching pixels from image to image, simplifying image based on averages
