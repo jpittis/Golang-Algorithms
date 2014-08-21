@@ -22,20 +22,13 @@ func create(width int, height int) [][]cell {
 }
 
 func backtrack(maze [][]cell, r int, c int) [][]cell {
-	// base case
-	if noMoreToVisit(maze) {
-		return maze
-	}
-
 	var rNew, cNew = getClose(maze, r, c)
-	if rNew == -1 && cNew == -1 {
-		return maze
-	} else {
+	for !(rNew == -1 && cNew == -1) {
 		// break down walls
 		breakWallsBetween(&maze[r][c], r, c, &maze[rNew][cNew], rNew, cNew)
 		maze = backtrack(maze, rNew, cNew)
+		rNew, cNew = getClose(maze, r, c)
 	}
-
 	return maze
 }
 
@@ -67,25 +60,25 @@ func getClose(maze [][]cell, r int, c int) (int, int) {
 		{-1, -1,},
 	}
 	// hard coded north
-	if inBounds(maze, r - 1, c) && notVisited(maze[r][c]) {
+	if inBounds(maze, r - 1, c) && notVisited(maze[r - 1][c]) {
 		close[0][0] = r - 1
 		close[0][1] = c
 	}
 
 	// hard coded south
-	if inBounds(maze, r + 1, c) && notVisited(maze[r][c]) {
+	if inBounds(maze, r + 1, c) && notVisited(maze[r + 1][c]) {
 		close[1][0] = r + 1
 		close[1][1] = c
 	}
 
 	// hard coded east
-	if inBounds(maze, r, c - 1) && notVisited(maze[r][c]) {
+	if inBounds(maze, r, c - 1) && notVisited(maze[r][c - 1]) {
 		close[2][0] = r
 		close[2][1] = c - 1
 	}
 
 	// hard coded west
-	if inBounds(maze, r, c + 1) && notVisited(maze[r][c]) {
+	if inBounds(maze, r, c + 1) && notVisited(maze[r][c + 1]) {
 		close[3][0] = r
 		close[3][1] = c + 1
 	}
@@ -102,17 +95,6 @@ func inBounds(maze [][]cell, r int, c int) bool {
 	return r >= 0 && r < len(maze) && c >= 0 && c < len(maze[r])
 }
 
-func noMoreToVisit(maze [][]cell) bool {
-	for r := 0; r < len(maze); r++ {
-		for c := 0; c < len(maze[r]); c++ {
-			if notVisited(maze[r][c]) {
-				return false
-			}
-		}
-	}
-	return true
-}
-
 func notVisited(c cell) bool {
 	return !c.north && !c.south && !c.east && !c.west
 }
@@ -122,9 +104,9 @@ func PrintMaze(maze [][]cell) {
 	for r := 0; r < len(maze); r++ {
 		for c := 0; c < len(maze[r]); c++ {
 			if maze[r][c].north {
-				fmt.Print("   ")
+				fmt.Print("# #")
 			} else {
-				fmt.Print(" # ")
+				fmt.Print("###")
 			}
 		}
 		fmt.Println()
@@ -144,9 +126,9 @@ func PrintMaze(maze [][]cell) {
 		fmt.Println()
 		for c := 0; c < len(maze[r]); c++ {
 			if maze[r][c].south {
-				fmt.Print("   ")
+				fmt.Print("# #")
 			} else {
-				fmt.Print(" # ")
+				fmt.Print("###")
 			}
 		}
 		fmt.Println()
@@ -154,5 +136,5 @@ func PrintMaze(maze [][]cell) {
 }
 
 func main() {
-	PrintMaze(create(3, 3))
+	PrintMaze(create(10, 10))
 }
