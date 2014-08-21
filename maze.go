@@ -16,7 +16,33 @@ func create(width int, height int) [][]cell {
 			maze[r] = append(maze[r], cell{})
 		}
 	}
+
+
 	return maze
+}
+
+func backtrack(maze [][]cell) {
+	// base case
+	if nextNotVisited(maze) == -1, -1 {
+		return maze
+	}
+	return maze
+
+}
+
+func nextNotVisited(maze [][]cell) (int, int) {
+	for r := 0; r < len(maze); r++ {
+		for c := 0; c < len(maze[r]); c++ {
+			if notVisited(maze[r][c]) {
+				return r, c
+			}
+		}
+	}
+	return -1, -1
+}
+
+func notVisited(c cell) {
+	return !c.north && !c.south && !c.east && !c.west
 }
 
 // print a cell and its walls
