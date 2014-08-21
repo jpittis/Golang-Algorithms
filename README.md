@@ -4,3 +4,7 @@ A series of algorithms and small projects created to learn the Go language as we
 
 ####Sorting
 A Merge and Bubble sort as my first interaction with Go.
+
+TODO
+* Sudoku Solver
+* Trie
